@@ -3,20 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mourksi El Moatassam Billah - Software Engineer</title>
-    
-    <!-- Tailwind CSS -->
+    <title>BroWebs - Software Engineer</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Inter -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-    <!-- EmailJS SDK -->
+
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
-    <!-- Custom Styles -->
     <style>
         /* Use Inter as the default font */
         body {
@@ -46,7 +42,7 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
-        
+
         /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
@@ -78,10 +74,10 @@
 </head>
 <body class="antialiased">
 
-    <!-- Header & Navigation -->
     <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-white">M.E.M.B</a>
+            <a href="#" class="flex items-center text-2xl font-bold text-white">
+                <img src="src/9.jpg" alt="BroWebs Logo" class="h-10 mr-3"> <span>BroWebs</span> </a>
             <div class="hidden md:flex items-center space-x-8">
                 <a href="#about" class="nav-link text-slate-300 hover:text-white transition">About</a>
                 <a href="#services" class="nav-link text-slate-300 hover:text-white transition">Services</a>
@@ -95,7 +91,6 @@
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
         </nav>
-        <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-gray-900/90 backdrop-blur-sm">
             <a href="#about" class="block py-2 px-4 text-sm text-slate-300 hover:bg-gray-700/50">About</a>
             <a href="#services" class="block py-2 px-4 text-sm text-slate-300 hover:bg-gray-700/50">Services</a>
@@ -104,9 +99,7 @@
         </div>
     </header>
 
-    <!-- Main Content -->
     <main>
-        <!-- Hero Section -->
         <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden">
             <div class="absolute inset-0 hero-gradient z-0"></div>
             <div id="particles-js" class="absolute inset-0 z-10"></div>
@@ -123,15 +116,13 @@
             </div>
         </section>
 
-        <!-- About Me Section -->
         <section id="about" class="py-20 md:py-32">
             <div class="container mx-auto px-6">
                 <div class="grid md:grid-cols-2 gap-12 items-center">
                     <div class="reveal">
-                        <!-- Image path is correct. Ensure src/1.jpg exists and you are using a local server. -->
-                        <img src="src/1.jpg" 
-                             onerror="this.onerror=null;this.src='https://placehold.co/600x600/1e3a8a/ffffff?text=M.E.M.B';" 
-                             alt="Mourksi El Moatassam Billah" 
+                        <img src="src/1.jpg"
+                             onerror="this.onerror=null;this.src='https://placehold.co/600x600/1e3a8a/ffffff?text=M.E.M.B';"
+                             alt="Mourksi El Moatassam Billah"
                              class="rounded-full shadow-2xl mx-auto w-2/3 md:w-full aspect-square object-cover">
                     </div>
                     <div class="reveal">
@@ -150,7 +141,6 @@
             </div>
         </section>
 
-        <!-- Services/Plans Section -->
         <section id="services" class="py-20 md:py-32 bg-gray-900/50">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12 reveal">
@@ -158,7 +148,6 @@
                     <p class="text-slate-400 mt-2">Choose a plan that fits your needs.</p>
                 </div>
                 <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-                    <!-- Basic Plan -->
                     <div class="glass-effect rounded-xl p-8 text-center flex flex-col h-full reveal">
                         <h3 class="text-2xl font-bold text-white mb-2">Basic Plan</h3>
                         <p class="text-slate-400 mb-6 italic text-sm">Good for starting out, but very limited.</p>
@@ -173,7 +162,6 @@
                         <a href="#contact" class="mt-auto block w-full bg-gray-700 text-white font-semibold py-3 rounded-lg hover:bg-gray-600 transition">Get Started</a>
                     </div>
 
-                    <!-- Medium Plan -->
                     <div class="glass-effect rounded-xl p-8 text-center flex flex-col h-full reveal border-2 border-blue-500 transform lg:scale-105 shadow-2xl shadow-blue-500/20 relative">
                         <span class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Most Popular</span>
                         <h3 class="text-2xl font-bold text-white mb-2">⭐ Medium Plan</h3>
@@ -189,7 +177,6 @@
                         <a href="#contact" class="mt-auto block w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition">Get Started</a>
                     </div>
 
-                    <!-- High-Level Plan -->
                     <div class="glass-effect rounded-xl p-8 text-center flex flex-col h-full reveal">
                         <h3 class="text-2xl font-bold text-white mb-2">👑 High-Level Plan</h3>
                         <p class="text-slate-400 mb-6 italic text-sm">Includes everything from Medium, plus more.</p>
@@ -208,7 +195,6 @@
             </div>
         </section>
 
-        <!-- Portfolio Section -->
         <section id="portfolio" class="py-20 md:py-32">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12 reveal">
@@ -216,9 +202,8 @@
                     <p class="text-slate-400 mt-2">A selection of my recent projects.</p>
                 </div>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Project 1: Lynart -->
                     <a href="https://mutseeem.github.io/lynart/" target="_blank" class="block group relative overflow-hidden rounded-lg reveal">
-                        <img src="src/2.jpg" 
+                        <img src="src/2.jpg"
                              onerror="this.onerror=null;this.src='https://placehold.co/600x400/1e3a8a/ffffff?text=Lynart';"
                              alt="Lynart Project" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
                         <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -226,9 +211,8 @@
                             <p class="text-slate-300 text-sm">E-commerce website for a small brand.</p>
                         </div>
                     </a>
-                    <!-- Project 2: Preschool Registration -->
                     <a href="https://mutseeem.github.io/preschoolWebApp/" target="_blank" class="block group relative overflow-hidden rounded-lg reveal">
-                        <img src="src/3.jpg" 
+                        <img src="src/3.jpg"
                              onerror="this.onerror=null;this.src='https://placehold.co/600x400/4f46e5/ffffff?text=Preschool+App';"
                              alt="Preschool Registration Project" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
                         <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -236,9 +220,8 @@
                             <p class="text-slate-300 text-sm">A web application for preschool registration.</p>
                         </div>
                     </a>
-                    <!-- Project 3: Dental RDV -->
                     <a href="https://mutseeem.github.io/Dr/" target="_blank" class="block group relative overflow-hidden rounded-lg reveal">
-                         <img src="src/4.jpg" 
+                         <img src="src/4.jpg"
                              onerror="this.onerror=null;this.src='https://placehold.co/600x400/3b82f6/ffffff?text=Dental+RDV';"
                              alt="Dental RDV Project" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
                         <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -250,7 +233,6 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
         <section id="contact" class="py-20 md:py-32 bg-gray-900/50">
             <div class="container mx-auto px-6">
                 <div class="text-center mb-12 reveal">
@@ -283,7 +265,6 @@
         </section>
     </main>
 
-    <!-- Footer -->
     <footer class="bg-gray-900">
         <div class="container mx-auto px-6 py-8 text-center text-slate-400">
             <div class="mb-4">
@@ -292,8 +273,7 @@
             <p>&copy; 2024 Mourksi El Moatassam Billah. All Rights Reserved.</p>
         </div>
     </footer>
-    
-    <!-- Floating WhatsApp Button -->
+
     <a href="https://wa.me/213549765903" target="_blank" class="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition transform hover:scale-110 z-40">
         <svg class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
             <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.267.655 4.398 1.908 6.166l-1.138 4.162 4.277-1.12z"/>
@@ -301,7 +281,6 @@
     </a>
 
 
-    <!-- Particles.js for hero animation -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 
     <script>
@@ -326,7 +305,7 @@
             if (contactForm) {
                 contactForm.addEventListener('submit', function(event) {
                     event.preventDefault();
-                    
+
                     // --- Show loading state ---
                     submitButton.disabled = true;
                     submitButton.textContent = 'Sending...';
@@ -360,7 +339,7 @@
                     });
                 });
             }
-        
+
             // --- Particles.js Configuration ---
             particlesJS('particles-js', {
                 "particles": {
@@ -385,7 +364,7 @@
             mobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.toggle('hidden');
             });
-            
+
             // --- Header Style on Scroll ---
             const header = document.getElementById('header');
             window.addEventListener('scroll', () => {
@@ -406,7 +385,7 @@
                     }
                 });
             });
-            
+
             // --- Reveal on Scroll Animation ---
             const revealElements = document.querySelectorAll('.reveal');
             const revealOnScroll = () => {
