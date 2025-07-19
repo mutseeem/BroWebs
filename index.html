@@ -70,6 +70,16 @@
             transform: translateY(0px);
             opacity: 1;
         }
+        
+        /* Black and white filter and hover effect for profile image */
+        .profile-image {
+            filter: grayscale(100%);
+            transition: filter 0.3s ease-in-out;
+        }
+
+        .profile-image:hover {
+            filter: grayscale(0%);
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -77,7 +87,9 @@
     <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="flex items-center text-2xl font-bold text-white">
-                <img src="src/9.jpg" alt="BroWebs Logo" class="h-10 mr-3"> <span>BroWebs</span> </a>
+                <img src="src/9.jpg" alt="BroWebs Logo" class="h-10 mr-3">
+                <span>BroWebs</span>
+            </a>
             <div class="hidden md:flex items-center space-x-8">
                 <a href="#about" class="nav-link text-slate-300 hover:text-white transition">About</a>
                 <a href="#services" class="nav-link text-slate-300 hover:text-white transition">Services</a>
@@ -123,7 +135,7 @@
                         <img src="src/1.jpg"
                              onerror="this.onerror=null;this.src='https://placehold.co/600x600/1e3a8a/ffffff?text=M.E.M.B';"
                              alt="Mourksi El Moatassam Billah"
-                             class="rounded-full shadow-2xl mx-auto w-2/3 md:w-full aspect-square object-cover">
+                             class="profile-image rounded-full shadow-2xl mx-auto w-2/3 md:w-full aspect-square object-cover">
                     </div>
                     <div class="reveal">
                         <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">About Me</h2>
@@ -149,7 +161,7 @@
                 </div>
                 <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-8 items-start">
                     <div class="glass-effect rounded-xl p-8 text-center flex flex-col h-full reveal">
-                        <h3 class="text-2xl font-bold text-white mb-2">💼 Basic Plan</h3>
+                        <h3 class="text-2xl font-bold text-white mb-2">Basic Plan</h3>
                         <p class="text-slate-400 mb-6 italic text-sm">Good for starting out, but very limited.</p>
                         <div class="text-4xl font-extrabold text-white mb-6">35,000 <span class="text-2xl font-medium text-slate-300">DZD</span></div>
                         <ul class="text-slate-300 space-y-3 mb-8 text-left flex-grow">
@@ -270,7 +282,7 @@
             <div class="mb-4">
                 <a href="https://wa.me/213549765903" target="_blank" class="hover:text-white transition">Phone/WhatsApp: +213 549 76 59 03</a>
             </div>
-            <p>&copy; 2025 Mourksi El Moatassam Billah. All Rights Reserved.</p>
+            <p>&copy; 2024 Mourksi El Moatassam Billah. All Rights Reserved.</p>
         </div>
     </footer>
 
