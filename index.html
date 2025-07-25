@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BroWebs - Software Engineer</title>
+    <title>BroWebs - Building Digital Experiences</title>
 
     <script src="https://cdn.tailwindcss.com"></script>
 
@@ -12,25 +12,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
 
     <style>
-        /* Use Inter as the default font */
         body {
             font-family: 'Inter', sans-serif;
             background-color: #0a0a0a;
             color: #e2e8f0;
-            scroll-behavior: smooth; /* Enables smooth scrolling */
+            scroll-behavior: smooth;
         }
 
-        /* Glassmorphism effect for cards and nav */
         .glass-effect {
             background: rgba(17, 24, 39, 0.6);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
         }
 
-        /* Animated gradient for hero section */
         .hero-gradient {
             background: linear-gradient(-45deg, #1e3a8a, #3b82f6, #4f46e5, #0891b2);
             background-size: 400% 400%;
@@ -42,43 +41,53 @@
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
         }
+        
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0a; }
+        ::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #2563eb; }
 
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0a0a0a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #3b82f6;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #2563eb;
-        }
-
-        /* Reveal on scroll animation */
         .reveal {
-            position: relative;
-            transform: translateY(100px);
             opacity: 0;
-            transition: all 1s ease;
+            transition: all 1.2s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
-
+        .reveal.up { transform: translateY(100px); }
+        .reveal.left { transform: translateX(-100px); }
+        .reveal.right { transform: translateX(100px); }
+        
         .reveal.active {
-            transform: translateY(0px);
+            transform: translateY(0) translateX(0);
             opacity: 1;
         }
         
-        /* Black and white filter and hover effect for profile image */
         .profile-image {
             filter: grayscale(100%);
-            transition: filter 0.3s ease-in-out;
+            transition: filter 0.4s ease-in-out, transform 0.4s ease-in-out;
         }
 
         .profile-image:hover {
             filter: grayscale(0%);
+            transform: scale(1.05);
+        }
+
+        /* 3D Tilt Effect for Cards */
+        .tilt-card {
+            transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transform-style: preserve-3d;
+        }
+
+        /* Custom glow effect for buttons */
+        .btn-glow:hover {
+            box-shadow: 0 0 15px 2px rgba(59, 130, 246, 0.5);
+        }
+
+        /* Animated typing cursor */
+        .typed-cursor {
+            color: #60a5fa;
+            animation: typedjsBlink 0.7s infinite;
+        }
+        @keyframes typedjsBlink {
+            50% { opacity: 0.0; }
         }
     </style>
 </head>
@@ -87,26 +96,26 @@
     <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
         <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="#" class="flex items-center text-2xl font-bold text-white">
-                <img src="src/9.jpg" alt="BroWebs Logo" class="h-10 mr-3">
+                <img src="src/5.jpg" alt="BroWebs Logo" class="h-10 mr-3 rounded-md">
                 <span>BroWebs</span>
             </a>
             <div class="hidden md:flex items-center space-x-8">
-                <a href="#about" class="nav-link text-slate-300 hover:text-white transition">About</a>
+                <a href="#about" class="nav-link text-slate-300 hover:text-white transition">About Us</a>
                 <a href="#services" class="nav-link text-slate-300 hover:text-white transition">Services</a>
-                <a href="#portfolio" class="nav-link text-slate-300 hover:text-white transition">Portfolio</a>
+                <a href="#portfolio" class="nav-link text-slate-300 hover:text-white transition">Our Work</a>
                 <a href="#contact" class="nav-link text-slate-300 hover:text-white transition">Contact</a>
             </div>
-            <a href="#contact" class="hidden md:block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition">
-                Hire Me
+            <a href="#contact" class="hidden md:block bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition btn-glow">
+                Hire Us
             </a>
             <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
             </button>
         </nav>
         <div id="mobile-menu" class="hidden md:hidden bg-gray-900/90 backdrop-blur-sm">
-            <a href="#about" class="block py-2 px-4 text-sm text-slate-300 hover:bg-gray-700/50">About</a>
+            <a href="#about" class="block py-2 px-4 text-sm text-slate-300 hover:bg-gray-700/50">About Us</a>
             <a href="#services" class="block py-2 px-4 text-sm text-slate-300 hover:bg-gray-700/50">Services</a>
-            <a href="#portfolio" class="block py-2 px-4 text-sm text-slate-300 hover:bg-gray-700/50">Portfolio</a>
+            <a href="#portfolio" class="block py-2 px-4 text-sm text-slate-300 hover:bg-gray-700/50">Our Work</a>
             <a href="#contact" class="block py-2 px-4 text-sm text-slate-300 hover:bg-gray-700/50">Contact</a>
         </div>
     </header>
@@ -117,36 +126,59 @@
             <div id="particles-js" class="absolute inset-0 z-10"></div>
             <div class="text-center z-20 px-4">
                 <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold text-white leading-tight mb-4">
-                    Mourksi El Moatassam Billah
+                    We Build <span id="typed-output"></span>
                 </h1>
-                <p class="text-xl md:text-2xl text-slate-200 mb-8">
-                    I'm a passionate Software Engineer specializing in building modern web applications.
+                <p class="text-lg md:text-xl text-slate-200 max-w-3xl mx-auto mb-8">
+                    Crafting bespoke websites and powerful web applications to elevate your brand's digital presence.
                 </p>
-                <a href="#services" class="bg-white text-blue-600 font-bold py-3 px-8 rounded-full text-lg hover:bg-slate-200 transition transform hover:scale-105">
-                    View My Services
-                </a>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <a href="#services" class="bg-white text-blue-600 font-bold py-3 px-8 rounded-full text-lg hover:bg-slate-200 transition transform hover:scale-105 w-full sm:w-auto">
+                        View Our Services
+                    </a>
+                     <a href="#portfolio" class="border-2 border-white text-white font-bold py-3 px-8 rounded-full text-lg hover:bg-white/10 transition transform hover:scale-105 w-full sm:w-auto">
+                        See Our Work
+                    </a>
+                </div>
             </div>
         </section>
 
-        <section id="about" class="py-20 md:py-32">
+        <section id="about" class="py-20 md:py-32 overflow-hidden">
             <div class="container mx-auto px-6">
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="reveal">
-                        <img src="src/1.jpg"
-                             onerror="this.onerror=null;this.src='https://placehold.co/600x600/1e3a8a/ffffff?text=M.E.M.B';"
-                             alt="Mourksi El Moatassam Billah"
-                             class="profile-image rounded-full shadow-2xl mx-auto w-2/3 md:w-full aspect-square object-cover">
+                <div class="text-center mb-16 reveal up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Meet the Architects of Your Vision</h2>
+                    <p class="text-slate-400 mt-3 max-w-2xl mx-auto">We are a duo of passionate developers dedicated to turning your ideas into reality through code and creativity.</p>
+                </div>
+                <div class="grid md:grid-cols-2 gap-x-12 gap-y-16 items-center">
+                    
+                    <div class="group reveal left" style="perspective: 1000px;">
+                        <div class="glass-effect rounded-2xl p-8 relative tilt-card group-hover:shadow-2xl group-hover:shadow-blue-500/20">
+                             <img src="src/1.jpg"
+                                 onerror="this.onerror=null;this.src='https://placehold.co/600x600/1e3a8a/ffffff?text=M.E.M.B';"
+                                 alt="Mourksi El Moatassam Billah"
+                                 class="profile-image rounded-full shadow-2xl mx-auto w-40 h-40 object-cover absolute -top-16 left-1/2 -translate-x-1/2 border-4 border-gray-800">
+                            <div class="mt-24 text-center">
+                                <h3 class="text-2xl font-bold text-white">Mourksi El Moatassam Billah</h3>
+                                <p class="text-blue-400 font-semibold mb-4">Backend Team Leader</p>
+                                <p class="text-slate-400">
+                                    Moatassam engineers the robust, scalable backbones of our applications. With expertise in Spring Boot and Java, he transforms complex requirements into seamless, high-performance server-side solutions.
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="reveal">
-                        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">About Me</h2>
-                        <p class="text-slate-400 mb-4">
-                            Hello! I'm Mourksi, a software engineer with a deep passion for creating elegant, efficient, and user-friendly web applications. With a strong foundation in modern web technologies, I thrive on turning complex problems into beautiful, intuitive digital experiences.
-                        </p>
-                        <p class="text-slate-400 mb-6">
-                            My journey in tech is driven by a constant curiosity and a desire to learn. I'm proficient in the MERN stack (MongoDB, Express.js, React, Node.js) and always excited to explore new tools and frameworks to build better products.
-                        </p>
-                        <div class="flex space-x-4">
-                            <a href="#contact" class="bg-gray-700 text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-600 transition">Contact Me</a>
+
+                    <div class="group reveal right" style="perspective: 1000px;">
+                        <div class="glass-effect rounded-2xl p-8 relative tilt-card group-hover:shadow-2xl group-hover:shadow-purple-500/20">
+                             <img src="src/6.jpg"
+                                 onerror="this.onerror=null;this.src='https://placehold.co/600x600/4f46e5/ffffff?text=L.S.I';"
+                                 alt="Laggoune Seif el Islem"
+                                 class="profile-image rounded-full shadow-2xl mx-auto w-40 h-40 object-cover absolute -top-16 left-1/2 -translate-x-1/2 border-4 border-gray-800">
+                            <div class="mt-24 text-center">
+                                <h3 class="text-2xl font-bold text-white">Laggoune Seif el Islem</h3>
+                                <p class="text-purple-400 font-semibold mb-4">Frontend Team Leader</p>
+                                <p class="text-slate-400">
+                                   Seif is the creative force behind our user interfaces. He leverages React and modern CSS to build visually stunning, intuitive, and responsive frontends that captivate and engage users.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -155,53 +187,91 @@
 
         <section id="services" class="py-20 md:py-32 bg-gray-900/50">
             <div class="container mx-auto px-6">
-                <div class="text-center mb-12 reveal">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white">Services & Plans</h2>
-                    <p class="text-slate-400 mt-2">Choose a plan that fits your needs.</p>
+                <div class="text-center mb-12 reveal up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Packages Tailored for Growth</h2>
+                    <p class="text-slate-400 mt-3">From simple landing pages to complex web systems, we have a solution for you.</p>
                 </div>
-                <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-8 items-start">
-                    <div class="glass-effect rounded-xl p-8 text-center flex flex-col h-full reveal">
-                        <h3 class="text-2xl font-bold text-white mb-2">💼 Basic Plan</h3>
-                        <p class="text-slate-400 mb-6 italic text-sm">Good for starting out, but very limited.</p>
-                        <div class="text-4xl font-extrabold text-white mb-6">35,000 <span class="text-2xl font-medium text-slate-300">DZD</span></div>
-                        <ul class="text-slate-300 space-y-3 mb-8 text-left flex-grow">
-                            <li class="flex items-start"><svg class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>One main homepage only</span></li>
-                            <li class="flex items-start"><svg class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Simple, mobile-friendly design</span></li>
-                            <li class="flex items-start"><svg class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Free domain for 1 year</span></li>
-                            <li class="flex items-start"><svg class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Free hosting for 1 month</span></li>
-                            <li class="flex items-start"><svg class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Basic contact form only</span></li>
-                        </ul>
-                        <a href="#contact" class="mt-auto block w-full bg-gray-700 text-white font-semibold py-3 rounded-lg hover:bg-gray-600 transition">Get Started</a>
+                
+                <div class="mb-12 reveal up" style="transition-delay: 100ms;">
+                    <div class="glass-effect max-w-4xl mx-auto rounded-xl border border-teal-500/30 p-6 text-center shadow-lg shadow-teal-500/10">
+                        <h3 class="text-2xl font-bold text-white flex items-center justify-center gap-3">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-teal-400" viewBox="0 0 20 20" fill="currentColor">
+                              <path d="M5 4a1 1 0 00-2 0v7.268a2 2 0 000 3.464V16a1 1 0 102 0v-1.268a2 2 0 000-3.464V4zM11 4a1 1 0 10-2 0v1.268a2 2 0 000 3.464V16a1 1 0 102 0V8.732a2 2 0 000-3.464V4zM16 3a1 1 0 011 1v7.268a2 2 0 010 3.464V16a1 1 0 11-2 0v-1.268a2 2 0 010-3.464V4a1 1 0 011-1z" />
+                            </svg>
+                            <span>Create a Personalized Plan</span>
+                        </h3>
+                        <p class="text-slate-400 mt-2">
+                           Need something different? Mix and match features from our plans or bring your unique ideas. We'll build a custom package tailored perfectly to your project.
+                        </p>
+                         <a href="#contact" class="inline-block mt-4 bg-teal-500 text-white font-semibold py-2 px-5 rounded-lg hover:bg-teal-600 transition">
+                            Build Your Plan
+                        </a>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+                    
+                    <div class="group reveal up" style="perspective: 1000px; transition-delay: 200ms;">
+                        <div class="glass-effect rounded-xl p-8 text-center flex flex-col h-full tilt-card border-t-4 border-transparent group-hover:border-blue-500 group-hover:transform group-hover:-translate-y-2">
+                            <h3 class="text-2xl font-bold text-white mb-2">💼 Silver Plan</h3>
+                            <p class="text-slate-400 mb-6 italic text-sm">Great for a simple online presence.</p>
+                            <div class="text-4xl font-extrabold text-white mb-6">35,000 <span class="text-2xl font-medium text-slate-300">DZD</span></div>
+                            <ul class="text-slate-300 space-y-3 mb-8 text-left flex-grow">
+                                <li class="flex items-start"><svg class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>One main homepage only</span></li>
+                                <li class="flex items-start"><svg class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Simple, mobile-friendly design</span></li>
+                                <li class="flex items-start"><svg class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Appointment form via EmailJS</span></li>
+                                <li class="flex items-start"><svg class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Free domain for 1 year</span></li>
+                                <li class="flex items-start"><svg class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Free hosting for 1 month</span></li>
+                                 <li class="flex items-start"><svg class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>1 week of free support</span></li>
+                            </ul>
+                            <div class="mt-auto space-y-3 pt-4">
+                                <a href="https://browebs.my.canva.site/silverplan" target="_blank" class="block w-full bg-gray-700 text-white font-semibold py-3 rounded-lg hover:bg-gray-600 transition">View Details</a>
+                                <a href="#contact" class="block w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition btn-glow">Get Started</a>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="glass-effect rounded-xl p-8 text-center flex flex-col h-full reveal border-2 border-blue-500 transform lg:scale-105 shadow-2xl shadow-blue-500/20 relative">
-                        <span class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-blue-500 text-white text-xs font-bold px-3 py-1 rounded-full uppercase">Most Popular</span>
-                        <h3 class="text-2xl font-bold text-white mb-2">⭐ Medium Plan</h3>
-                        <p class="text-slate-400 mb-6 italic text-sm">A great package for most small businesses.</p>
-                        <div class="text-4xl font-extrabold text-white mb-6">65,000 <span class="text-2xl font-medium text-slate-300">DZD</span></div>
-                        <ul class="text-slate-300 space-y-3 mb-8 text-left flex-grow">
-                            <li class="flex items-start"><svg class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>4 pages (Home – About Us – Services – Contact)</span></li>
-                            <li class="flex items-start"><svg class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Professional design matching your brand</span></li>
-                            <li class="flex items-start"><svg class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Free .com domain & 3 months hosting</span></li>
-                            <li class="flex items-start"><svg class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Contact form + photo gallery</span></li>
-                            <li class="flex items-start"><svg class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>1-month technical support</span></li>
-                        </ul>
-                        <a href="#contact" class="mt-auto block w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition">Get Started</a>
+                    <div class="group reveal up" style="perspective: 1000px; transition-delay: 300ms;">
+                        <div class="glass-effect rounded-xl p-8 text-center flex flex-col h-full tilt-card border-2 border-yellow-400 transform lg:scale-105 shadow-2xl shadow-yellow-400/20 relative group-hover:transform group-hover:-translate-y-2">
+                            <span class="absolute top-0 -translate-y-1/2 left-1/2 -translate-x-1/2 bg-yellow-400 text-black text-xs font-bold px-3 py-1 rounded-full uppercase">Most Popular</span>
+                            <h3 class="text-2xl font-bold text-white mb-2">🥇 Gold Plan</h3>
+                            <p class="text-slate-400 mb-6 italic text-sm">Ideal for professionals who want multiple pages and full deployment.</p>
+                            <div class="text-4xl font-extrabold text-white mb-6">65,000 <span class="text-2xl font-medium text-slate-300">DZD</span></div>
+                            <ul class="text-slate-300 space-y-3 mb-8 text-left flex-grow">
+                                <li class="flex items-start"><svg class="w-5 h-5 text-yellow-400 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Up to 5 custom pages</span></li>
+                                <li class="flex items-start"><svg class="w-5 h-5 text-yellow-400 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Modern responsive design</span></li>
+                                <li class="flex items-start"><svg class="w-5 h-5 text-yellow-400 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>All forms send via EmailJS</span></li>
+                                <li class="flex items-start"><svg class="w-5 h-5 text-yellow-400 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Basic SEO setup</span></li>
+                                 <li class="flex items-start"><svg class="w-5 h-5 text-yellow-400 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>WhatsApp button (optional)</span></li>
+                                 <li class="flex items-start"><svg class="w-5 h-5 text-yellow-400 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Free domain + hosting included</span></li>
+                                <li class="flex items-start"><svg class="w-5 h-5 text-yellow-400 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>1 month of free support</span></li>
+                            </ul>
+                            <div class="mt-auto space-y-3 pt-4">
+                               <a href="https://browebs.my.canva.site/goldplan" target="_blank" class="block w-full bg-gray-700 text-white font-semibold py-3 rounded-lg hover:bg-gray-600 transition">View Details</a>
+                               <a href="#contact" class="block w-full bg-yellow-500 text-black font-semibold py-3 rounded-lg hover:bg-yellow-600 transition btn-glow">Get Started</a>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="glass-effect rounded-xl p-8 text-center flex flex-col h-full reveal">
-                        <h3 class="text-2xl font-bold text-white mb-2">👑 High-Level Plan</h3>
-                        <p class="text-slate-400 mb-6 italic text-sm">Includes everything from Medium, plus more.</p>
-                        <div class="text-4xl font-extrabold text-white mb-6">85,000+ <span class="text-2xl font-medium text-slate-300">DZD</span></div>
-                        <ul class="text-slate-300 space-y-3 mb-8 text-left flex-grow">
-                            <li class="flex items-start"><svg class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Admin dashboard (CMS)</span></li>
-                            <li class="flex items-start"><svg class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>SEO starter optimization</span></li>
-                            <li class="flex items-start"><svg class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Direct WhatsApp integration</span></li>
-                            <li class="flex items-start"><svg class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Website visitor analytics</span></li>
-                            <li class="flex items-start"><svg class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Fast-loading speed optimization</span></li>
-                            <li class="flex items-start"><svg class="w-5 h-5 text-blue-500 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>3 months of premium support</span></li>
-                        </ul>
-                        <a href="#contact" class="mt-auto block w-full bg-gray-700 text-white font-semibold py-3 rounded-lg hover:bg-gray-600 transition">Get Started</a>
+                    <div class="group reveal up" style="perspective: 1000px; transition-delay: 400ms;">
+                        <div class="glass-effect rounded-xl p-8 text-center flex flex-col h-full tilt-card border-t-4 border-transparent group-hover:border-purple-500 group-hover:transform group-hover:-translate-y-2">
+                            <h3 class="text-2xl font-bold text-white mb-2">👑 Platinum Plan</h3>
+                            <p class="text-slate-400 mb-6 italic text-sm">Complete web system with admin panel & backend control.</p>
+                            <div class="text-4xl font-extrabold text-white mb-6">100,000+ <span class="text-2xl font-medium text-slate-300">DZD</span></div>
+                            <ul class="text-slate-300 space-y-3 mb-8 text-left flex-grow">
+                                <li class="flex items-start"><svg class="w-5 h-5 text-purple-400 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Dynamic multi-page site</span></li>
+                                <li class="flex items-start"><svg class="w-5 h-5 text-purple-400 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Backend with Spring Boot & MySQL</span></li>
+                                <li class="flex items-start"><svg class="w-5 h-5 text-purple-400 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Admin dashboard to manage content</span></li>
+                                 <li class="flex items-start"><svg class="w-5 h-5 text-purple-400 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Database storage + email notifications</span></li>
+                                <li class="flex items-start"><svg class="w-5 h-5 text-purple-400 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Secure login system</span></li>
+                                <li class="flex items-start"><svg class="w-5 h-5 text-purple-400 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>Free domain + hosting + SSL</span></li>
+                                <li class="flex items-start"><svg class="w-5 h-5 text-purple-400 mr-2 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg><span>6 months of full support</span></li>
+                            </ul>
+                             <div class="mt-auto space-y-3 pt-4">
+                                <a href="https://browebs.my.canva.site/platinumplan" target="_blank" class="block w-full bg-gray-700 text-white font-semibold py-3 rounded-lg hover:bg-gray-600 transition">View Details</a>
+                                <a href="#contact" class="block w-full bg-purple-600 text-white font-semibold py-3 rounded-lg hover:bg-purple-700 transition btn-glow">Get Started</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -209,68 +279,74 @@
 
         <section id="portfolio" class="py-20 md:py-32">
             <div class="container mx-auto px-6">
-                <div class="text-center mb-12 reveal">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white">My Work</h2>
-                    <p class="text-slate-400 mt-2">A selection of my recent projects.</p>
+                <div class="text-center mb-16 reveal up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Our Work</h2>
+                    <p class="text-slate-400 mt-3">A selection of our recent projects.</p>
                 </div>
                 <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <a href="https://mutseeem.github.io/lynart/" target="_blank" class="block group relative overflow-hidden rounded-lg reveal">
-                        <img src="src/2.jpg"
-                             onerror="this.onerror=null;this.src='https://placehold.co/600x400/1e3a8a/ffffff?text=Lynart';"
-                             alt="Lynart Project" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <h3 class="text-xl font-bold text-white">Lynart</h3>
-                            <p class="text-slate-300 text-sm">E-commerce website for a small brand.</p>
-                        </div>
-                    </a>
-                    <a href="https://mutseeem.github.io/preschoolWebApp/" target="_blank" class="block group relative overflow-hidden rounded-lg reveal">
-                        <img src="src/3.jpg"
-                             onerror="this.onerror=null;this.src='https://placehold.co/600x400/4f46e5/ffffff?text=Preschool+App';"
-                             alt="Preschool Registration Project" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <h3 class="text-xl font-bold text-white">Preschool Registration</h3>
-                            <p class="text-slate-300 text-sm">A web application for preschool registration.</p>
-                        </div>
-                    </a>
-                    <a href="https://mutseeem.github.io/Dr/" target="_blank" class="block group relative overflow-hidden rounded-lg reveal">
-                         <img src="src/4.jpg"
-                             onerror="this.onerror=null;this.src='https://placehold.co/600x400/3b82f6/ffffff?text=Dental+RDV';"
-                             alt="Dental RDV Project" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <h3 class="text-xl font-bold text-white">Dental RDV</h3>
-                            <p class="text-slate-300 text-sm">Appointment booking system for dental clinics.</p>
-                        </div>
-                    </a>
+                    <div class="reveal up" style="transition-delay: 100ms;">
+                        <a href="https://mutseeem.github.io/lynart/" target="_blank" class="block group relative overflow-hidden rounded-lg">
+                            <img src="src/2.jpg"
+                                 onerror="this.onerror=null;this.src='https://placehold.co/600x400/1e3a8a/ffffff?text=Lynart';"
+                                 alt="Lynart Project" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                <h3 class="text-xl font-bold text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Lynart</h3>
+                                <p class="text-slate-300 text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">E-commerce website for a small brand.</p>
+                            </div>
+                        </a>
+                    </div>
+                     <div class="reveal up" style="transition-delay: 200ms;">
+                        <a href="https://mutseeem.github.io/preschoolWebApp/" target="_blank" class="block group relative overflow-hidden rounded-lg">
+                            <img src="src/3.jpg"
+                                 onerror="this.onerror=null;this.src='https://placehold.co/600x400/4f46e5/ffffff?text=Preschool+App';"
+                                 alt="Preschool Registration Project" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                <h3 class="text-xl font-bold text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Preschool Registration</h3>
+                                <p class="text-slate-300 text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">A web application for preschool registration.</p>
+                            </div>
+                        </a>
+                    </div>
+                     <div class="reveal up" style="transition-delay: 300ms;">
+                        <a href="https://mutseeem.github.io/Dr/" target="_blank" class="block group relative overflow-hidden rounded-lg">
+                             <img src="src/4.jpg"
+                                 onerror="this.onerror=null;this.src='https://placehold.co/600x400/3b82f6/ffffff?text=Dental+RDV';"
+                                 alt="Dental RDV Project" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                                <h3 class="text-xl font-bold text-white transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">Dental RDV</h3>
+                                <p class="text-slate-300 text-sm transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-100">Appointment booking system for dental clinics.</p>
+                            </div>
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="contact" class="py-20 md:py-32 bg-gray-900/50">
             <div class="container mx-auto px-6">
-                <div class="text-center mb-12 reveal">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white">Get In Touch</h2>
-                    <p class="text-slate-400 mt-2">Have a project in mind? Let's talk.</p>
+                <div class="text-center mb-12 reveal up">
+                    <h2 class="text-3xl md:text-4xl font-bold text-white">Have a Project in Mind?</h2>
+                    <p class="text-slate-400 mt-3">Let's build something amazing together. Reach out to us!</p>
                 </div>
-                <div class="max-w-xl mx-auto reveal">
+                <div class="max-w-xl mx-auto reveal up">
                     <form id="contact-form" class="space-y-6">
                         <div>
                             <label for="fullname" class="sr-only">Full Name</label>
-                            <input type="text" name="fullname" id="fullname" placeholder="Your Full Name" required class="w-full bg-gray-800 border border-gray-700 rounded-lg py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <input type="text" name="fullname" id="fullname" placeholder="Your Full Name" required class="w-full bg-gray-800 border border-gray-700 rounded-lg py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
                         </div>
                         <div>
                             <label for="user_email" class="sr-only">Email</label>
-                            <input type="email" name="user_email" id="user_email" placeholder="Your Email" required class="w-full bg-gray-800 border border-gray-700 rounded-lg py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <input type="email" name="user_email" id="user_email" placeholder="Your Email" required class="w-full bg-gray-800 border border-gray-700 rounded-lg py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
                         </div>
                         <div>
                             <label for="message" class="sr-only">Message</label>
-                            <textarea name="message" id="message" rows="4" placeholder="Your Message" required class="w-full bg-gray-800 border border-gray-700 rounded-lg py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                            <textarea name="message" id="message" rows="4" placeholder="Tell us about your project..." required class="w-full bg-gray-800 border border-gray-700 rounded-lg py-3 px-4 text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition"></textarea>
                         </div>
                         <div>
-                            <button type="submit" id="submit-button" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition disabled:opacity-50">
+                            <button type="submit" id="submit-button" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition disabled:opacity-50 btn-glow">
                                 Send Message
                             </button>
                         </div>
-                        <div id="form-feedback" class="text-center mt-4"></div>
+                        <div id="form-feedback" class="text-center mt-4 h-6"></div>
                     </form>
                 </div>
             </div>
@@ -282,7 +358,7 @@
             <div class="mb-4">
                 <a href="https://wa.me/213549765903" target="_blank" class="hover:text-white transition">Phone/WhatsApp: +213 549 76 59 03</a>
             </div>
-            <p>&copy; 2024 Mourksi El Moatassam Billah. All Rights Reserved.</p>
+            <p>&copy; 2025 BroWebs. All Rights Reserved.</p>
         </div>
     </footer>
 
@@ -298,18 +374,21 @@
     <script>
         // --- EmailJS Integration ---
         (function() {
-            // ===================================================================
-            // =================== IMPORTANT - PASTE YOUR KEY HERE ===============
-            // ===================================================================
-            // You MUST replace "YOUR_PUBLIC_KEY_GOES_HERE" with the actual
-            // Public Key from your EmailJS account (Account > API Keys).
-            emailjs.init({
-              publicKey: "bH608Nrf8RI7ZhsXz",
-            });
-            // ===================================================================
+            emailjs.init({ publicKey: "bH608Nrf8RI7ZhsXz" });
         })();
 
         window.onload = function() {
+            // --- Typed.js Hero Animation ---
+            new Typed('#typed-output', {
+                strings: ['Digital Experiences.', 'Creative Web Solutions.', 'Powerful Applications.', 'Your Vision, Online.'],
+                typeSpeed: 50,
+                backSpeed: 30,
+                backDelay: 2000,
+                loop: true,
+                smartBackspace: true
+            });
+
+            // --- Contact Form Logic ---
             const contactForm = document.getElementById('contact-form');
             const submitButton = document.getElementById('submit-button');
             const formFeedback = document.getElementById('form-feedback');
@@ -317,35 +396,27 @@
             if (contactForm) {
                 contactForm.addEventListener('submit', function(event) {
                     event.preventDefault();
-
-                    // --- Show loading state ---
                     submitButton.disabled = true;
                     submitButton.textContent = 'Sending...';
                     formFeedback.textContent = '';
-                    formFeedback.className = 'text-center mt-4'; // Reset classes
+                    formFeedback.className = 'text-center mt-4 h-6';
 
-                    // --- Service and Template IDs from your EmailJS account ---
                     const serviceID = 'service_f638nas';
-                    const userTemplateID = 'template_86n7uvc'; // Confirmation to user
-                    const adminTemplateID = 'template_xmew1d3'; // Notification to you
+                    const userTemplateID = 'template_86n7uvc';
+                    const adminTemplateID = 'template_xmew1d3';
 
-                    // --- Send both emails ---
                     Promise.all([
                         emailjs.sendForm(serviceID, userTemplateID, this),
                         emailjs.sendForm(serviceID, adminTemplateID, this)
                     ]).then(() => {
-                        // --- Success ---
-                        formFeedback.textContent = 'Message sent successfully! We will contact you shortly.';
+                        formFeedback.textContent = 'Message sent successfully! We will be in touch shortly.';
                         formFeedback.classList.add('text-green-500');
                         contactForm.reset();
                     }, (err) => {
-                        // --- Error ---
-                        // Display a more user-friendly error and log the detailed error to the console
                         console.error('EmailJS Error:', err);
-                        formFeedback.textContent = 'Failed to send message. Please try again later.';
+                        formFeedback.textContent = 'Failed to send message. Please try again.';
                         formFeedback.classList.add('text-red-500');
                     }).finally(() => {
-                        // --- Reset button state ---
                         submitButton.disabled = false;
                         submitButton.textContent = 'Send Message';
                     });
@@ -354,19 +425,8 @@
 
             // --- Particles.js Configuration ---
             particlesJS('particles-js', {
-                "particles": {
-                    "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-                    "color": { "value": "#ffffff" },
-                    "shape": { "type": "circle" },
-                    "opacity": { "value": 0.5, "random": false },
-                    "size": { "value": 3, "random": true },
-                    "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.4, "width": 1 },
-                    "move": { "enable": true, "speed": 2, "direction": "none", "out_mode": "out" }
-                },
-                "interactivity": {
-                    "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" } },
-                    "modes": { "repulse": { "distance": 150, "duration": 0.4 }, "push": { "particles_nb": 4 } }
-                },
+                "particles": { "number": { "value": 60, "density": { "enable": true, "value_area": 800 } }, "color": { "value": "#ffffff" }, "shape": { "type": "circle" }, "opacity": { "value": 0.4, "random": true }, "size": { "value": 3, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 1, "direction": "none", "random": true, "straight": false, "out_mode": "out", "bounce": false } },
+                "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "bubble" }, "onclick": { "enable": false } }, "modes": { "bubble": { "distance": 250, "size": 0, "duration": 2, "opacity": 0, "speed": 3 } } },
                 "retina_detect": true
             });
 
@@ -376,6 +436,11 @@
             mobileMenuButton.addEventListener('click', () => {
                 mobileMenu.classList.toggle('hidden');
             });
+            
+            document.querySelectorAll('#mobile-menu a').forEach(link => {
+                link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+            });
+
 
             // --- Header Style on Scroll ---
             const header = document.getElementById('header');
@@ -385,17 +450,6 @@
                 } else {
                     header.classList.remove('glass-effect');
                 }
-            });
-
-            // --- Smooth Scrolling for Nav Links ---
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    // The default behavior (scrolling) is handled by CSS `scroll-behavior: smooth;`
-                    // We just need to close the mobile menu if it's open.
-                    if (!mobileMenu.classList.contains('hidden')) {
-                        mobileMenu.classList.add('hidden');
-                    }
-                });
             });
 
             // --- Reveal on Scroll Animation ---
@@ -410,8 +464,24 @@
                 });
             };
             window.addEventListener('scroll', revealOnScroll);
-            // Initial check
             revealOnScroll();
+
+            // --- 3D Tilt Effect for Cards ---
+            const tiltCards = document.querySelectorAll('.tilt-card');
+            tiltCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const { width, height } = rect;
+                    const rotateX = (y / height - 0.5) * -15; // 15deg max tilt
+                    const rotateY = (x / width - 0.5) * 15;
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                });
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+                });
+            });
         };
     </script>
 </body>
